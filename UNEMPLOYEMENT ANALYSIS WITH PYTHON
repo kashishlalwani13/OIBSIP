@@ -1,45 +1,1000 @@
-#importing libraries
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import pandas as pd
-import matplotlib.pyplot as plt
-# read salaries datasets
-unemployment = pd.read_csv(r'C:\Users\kaash\OneDrive\Desktop\KLIMP\Internship\Oasis infobyte\unemployment analysis\output.csv\output.csv')
-#check the head of data
-unemployment.head()
-#check the back of the data
-unemployment.tail()
-#info about data
-unemployment.info()
-#now, we are checking start with a pairplot, and check for missing values
-sns.heatmap(unemployment.isnull(),cbar=False)
-#Which state has the most data
-color = sns.color_palette()
-cnt_srs = unemployment.State.value_counts()
-
-plt.figure(figsize=(12,8))
-
-plt.ylabel('Number of Occurrences', fontsize=12)
-plt.xlabel('States', fontsize=12)
-plt.title('Count the states', fontsize=15)
-plt.xticks(rotation='vertical')
-plt.show()
-# take the mean of rate state by state
-grouped_df = unemployment.groupby(["State"])["Rate"].aggregate("mean").reset_index()
-
-plt.figure(figsize=(12,8))
-
-plt.ylabel('Mean rate', fontsize=12)
-plt.xlabel('States', fontsize=12)
-plt.title("Average of mean", fontsize=15)
-plt.xticks(rotation='vertical')
-plt.show()
-
-
-#see the number of unique states
-unemployment.State.nunique()
-#See exact numbers
-make_total = unemployment.pivot_table("Rate",index=['State'],aggfunc='mean')
-topstate=make_total.sort_values(by='Rate',ascending=False)[:47]
-print(topstate)
+Year,Month,State,County,Rate
+2015,February,Mississippi,Newton County,6.1
+2015,February,Mississippi,Panola County,9.4
+2015,February,Mississippi,Monroe County,7.9
+2015,February,Mississippi,Hinds County,6.1
+2015,February,Mississippi,Kemper County,10.6
+2015,February,Mississippi,Calhoun County,6.9
+2015,February,Mississippi,Clarke County,7.9
+2015,February,Mississippi,Jefferson County,14.3
+2015,February,Mississippi,Madison County,4.5
+2015,February,Mississippi,Sharkey County,11.1
+2015,February,Mississippi,Tunica County,11.5
+2015,February,Mississippi,Tate County,7.6
+2015,February,Mississippi,Lafayette County,5.5
+2015,February,Mississippi,Bolivar County,8.6
+2015,February,Mississippi,Stone County,7.6
+2015,February,Mississippi,Noxubee County,10.6
+2015,February,Mississippi,Lamar County,4.7
+2015,February,Mississippi,Lee County,5.9
+2015,February,Mississippi,Desoto County,5.0
+2015,February,Mississippi,Adams County,7.6
+2015,February,Mississippi,Pontotoc County,5.9
+2015,February,Mississippi,Marion County,7.4
+2015,February,Mississippi,Jasper County,7.5
+2015,February,Mississippi,Simpson County,5.7
+2015,February,Mississippi,Sunflower County,12.6
+2015,February,Mississippi,Hancock County,6.6
+2015,February,Mississippi,Winston County,8.3
+2015,February,Mississippi,Carroll County,8.5
+2015,February,Mississippi,Copiah County,7.6
+2015,February,Mississippi,Jefferson Davis County,8.2
+2015,February,Mississippi,Lincoln County,5.9
+2015,February,Mississippi,Marshall County,7.7
+2015,February,Mississippi,Jackson County,7.3
+2015,February,Mississippi,Pike County,7.4
+2015,February,Mississippi,Prentiss County,6.2
+2015,February,Mississippi,Perry County,8.2
+2015,February,Mississippi,Franklin County,7.2
+2015,February,Mississippi,Lowndes County,7.5
+2015,February,Mississippi,Quitman County,12.1
+2015,February,Mississippi,Neshoba County,6.1
+2015,February,Mississippi,Clay County,10.3
+2015,February,Mississippi,Attala County,8.1
+2015,February,Mississippi,Alcorn County,5.6
+2015,February,Mississippi,Chickasaw County,8.1
+2015,February,Mississippi,Humphreys County,15.4
+2015,February,Mississippi,Greene County,7.7
+2015,February,Mississippi,Leflore County,11.3
+2015,February,Mississippi,Benton County,8.5
+2015,February,Mississippi,Coahoma County,11.7
+2015,February,Mississippi,Lawrence County,7.1
+2015,February,Mississippi,Tishomingo County,6.8
+2015,February,Mississippi,Covington County,5.8
+2015,February,Mississippi,Tippah County,6.9
+2015,February,Mississippi,Smith County,5.4
+2015,February,Mississippi,Washington County,11.4
+2015,February,Mississippi,Holmes County,13.0
+2015,February,Mississippi,Pearl River County,6.2
+2015,February,Mississippi,Itawamba County,5.8
+2015,February,Mississippi,Yalobusha County,7.6
+2015,February,Mississippi,Lauderdale County,6.7
+2015,February,Mississippi,Oktibbeha County,6.0
+2015,February,Mississippi,Harrison County,6.1
+2015,February,Mississippi,Amite County,7.3
+2015,February,Mississippi,Webster County,7.0
+2015,February,Mississippi,Scott County,4.8
+2015,February,Mississippi,Wilkinson County,9.8
+2015,February,Mississippi,Union County,5.4
+2015,February,Mississippi,Rankin County,4.1
+2015,February,Mississippi,Issaquena County,21.5
+2015,February,Mississippi,Choctaw County,6.4
+2015,February,Mississippi,Tallahatchie County,8.7
+2015,February,Mississippi,Leake County,6.0
+2015,February,Mississippi,Walthall County,8.3
+2015,February,Mississippi,Claiborne County,13.3
+2015,February,Mississippi,Wayne County,7.7
+2015,February,Mississippi,Yazoo County,8.4
+2015,February,Mississippi,Montgomery County,7.7
+2015,February,Mississippi,Forrest County,6.3
+2015,February,Mississippi,George County,7.8
+2015,February,Mississippi,Jones County,5.7
+2015,February,Mississippi,Grenada County,6.3
+2015,February,Mississippi,Warren County,6.7
+2015,February,Oklahoma,Major County,2.6
+2015,February,Oklahoma,Pottawatomie County,4.5
+2015,February,Oklahoma,Johnston County,6.5
+2015,February,Oklahoma,Jefferson County,5.0
+2015,February,Oklahoma,Beaver County,2.8
+2015,February,Oklahoma,Stephens County,4.7
+2015,February,Oklahoma,Washita County,4.3
+2015,February,Oklahoma,Marshall County,5.7
+2015,February,Oklahoma,Atoka County,6.3
+2015,February,Oklahoma,Noble County,3.7
+2015,February,Oklahoma,Pittsburg County,5.7
+2015,February,Oklahoma,Woodward County,3.9
+2015,February,Oklahoma,Beckham County,3.4
+2015,February,Oklahoma,Canadian County,3.5
+2015,February,Oklahoma,Payne County,3.6
+2015,February,Oklahoma,Woods County,2.5
+2015,February,Oklahoma,Pontotoc County,4.0
+2015,February,Oklahoma,Blaine County,4.0
+2015,February,Oklahoma,Le Flore County,6.8
+2015,February,Oklahoma,Adair County,6.8
+2015,February,Oklahoma,Rogers County,4.2
+2015,February,Oklahoma,Craig County,4.7
+2015,February,Oklahoma,Kingfisher County,3.0
+2015,February,Oklahoma,Lincoln County,4.5
+2015,February,Oklahoma,Delaware County,5.5
+2015,February,Oklahoma,Jackson County,3.9
+2015,February,Oklahoma,Bryan County,4.8
+2015,February,Oklahoma,Hughes County,7.5
+2015,February,Oklahoma,McCurtain County,7.5
+2015,February,Oklahoma,Comanche County,4.5
+2015,February,Oklahoma,Logan County,3.8
+2015,February,Oklahoma,Okmulgee County,7.2
+2015,February,Oklahoma,Garfield County,3.7
+2015,February,Oklahoma,Roger Mills County,2.8
+2015,February,Oklahoma,Custer County,3.6
+2015,February,Oklahoma,Harmon County,3.9
+2015,February,Oklahoma,Sequoyah County,6.6
+2015,February,Oklahoma,Wagoner County,4.1
+2015,February,Oklahoma,Seminole County,6.6
+2015,February,Oklahoma,Cleveland County,3.5
+2015,February,Oklahoma,Pushmataha County,7.9
+2015,February,Oklahoma,Okfuskee County,6.0
+2015,February,Oklahoma,Greer County,5.5
+2015,February,Oklahoma,Cimarron County,2.2
+2015,February,Oklahoma,Caddo County,5.0
+2015,February,Oklahoma,Nowata County,5.6
+2015,February,Oklahoma,Carter County,4.4
+2015,February,Oklahoma,Washington County,4.3
+2015,February,Oklahoma,Kiowa County,4.5
+2015,February,Oklahoma,Muskogee County,5.3
+2015,February,Oklahoma,Texas County,3.3
+2015,February,Oklahoma,McIntosh County,9.3
+2015,February,Oklahoma,Cherokee County,5.4
+2015,February,Oklahoma,Tulsa County,4.1
+2015,February,Oklahoma,Haskell County,7.6
+2015,February,Oklahoma,Tillman County,4.0
+2015,February,Oklahoma,Alfalfa County,2.6
+2015,February,Oklahoma,Kay County,5.6
+2015,February,Oklahoma,Latimer County,7.6
+2015,February,Oklahoma,Grady County,4.1
+2015,February,Oklahoma,Choctaw County,8.3
+2015,February,Oklahoma,Garvin County,4.4
+2015,February,Oklahoma,McClain County,3.4
+2015,February,Oklahoma,Mayes County,4.3
+2015,February,Oklahoma,Grant County,2.1
+2015,February,Oklahoma,Oklahoma County,4.0
+2015,February,Oklahoma,Osage County,5.2
+2015,February,Oklahoma,Murray County,4.1
+2015,February,Oklahoma,Ottawa County,5.7
+2015,February,Oklahoma,Dewey County,3.4
+2015,February,Oklahoma,Ellis County,3.5
+2015,February,Oklahoma,Harper County,2.9
+2015,February,Oklahoma,Creek County,4.9
+2015,February,Oklahoma,Pawnee County,6.1
+2015,February,Oklahoma,Cotton County,4.2
+2015,February,Oklahoma,Love County,3.8
+2015,February,Oklahoma,Coal County,7.3
+2015,February,Delaware,Sussex County,6.3
+2015,February,Delaware,New Castle County,4.9
+2015,February,Delaware,Kent County,5.7
+2015,February,Minnesota,Sibley County,5.5
+2015,February,Minnesota,Carver County,3.8
+2015,February,Minnesota,McLeod County,5.0
+2015,February,Minnesota,Blue Earth County,3.6
+2015,February,Minnesota,Todd County,5.9
+2015,February,Minnesota,Mower County,4.2
+2015,February,Minnesota,Anoka County,4.3
+2015,February,Minnesota,Fillmore County,5.9
+2015,February,Minnesota,Lincoln County,5.8
+2015,February,Minnesota,Goodhue County,4.5
+2015,February,Minnesota,Stearns County,4.8
+2015,February,Minnesota,Murray County,7.6
+2015,February,Minnesota,Lyon County,4.4
+2015,February,Minnesota,Wilkin County,4.3
+2015,February,Minnesota,Isanti County,5.9
+2015,February,Minnesota,Benton County,6.0
+2015,February,Minnesota,Brown County,5.4
+2015,February,Minnesota,Dakota County,3.8
+2015,February,Minnesota,Faribault County,5.5
+2015,February,Minnesota,Scott County,3.8
+2015,February,Minnesota,Lac qui Parle County,5.5
+2015,February,Minnesota,Wadena County,8.2
+2015,February,Minnesota,Hubbard County,8.2
+2015,February,Minnesota,Kittson County,5.0
+2015,February,Minnesota,Kanabec County,9.8
+2015,February,Minnesota,Olmsted County,3.7
+2015,February,Minnesota,Saint Louis County,5.3
+2015,February,Minnesota,Pope County,4.6
+2015,February,Minnesota,Marshall County,9.5
+2015,February,Minnesota,Watonwan County,6.0
+2015,February,Minnesota,Pipestone County,5.1
+2015,February,Minnesota,Crow Wing County,7.2
+2015,February,Minnesota,Lake of the Woods County,4.3
+2015,February,Minnesota,Itasca County,6.9
+2015,February,Minnesota,Steele County,4.3
+2015,February,Minnesota,Chisago County,5.3
+2015,February,Minnesota,Wabasha County,4.7
+2015,February,Minnesota,Swift County,6.2
+2015,February,Minnesota,Sherburne County,5.2
+2015,February,Minnesota,Beltrami County,5.8
+2015,February,Minnesota,Cottonwood County,4.5
+2015,February,Minnesota,Lake County,5.1
+2015,February,Minnesota,Chippewa County,5.2
+2015,February,Minnesota,Douglas County,4.6
+2015,February,Minnesota,Mahnomen County,6.5
+2015,February,Minnesota,Waseca County,5.4
+2015,February,Minnesota,Roseau County,5.2
+2015,February,Minnesota,Nobles County,4.0
+2015,February,Minnesota,Otter Tail County,6.0
+2015,February,Minnesota,Clearwater County,12.7
+2015,February,Minnesota,Hennepin County,3.6
+2015,February,Minnesota,Pine County,7.9
+2015,February,Minnesota,Martin County,5.0
+2015,February,Minnesota,Red Lake County,7.8
+2015,February,Minnesota,Norman County,6.4
+2015,February,Minnesota,Meeker County,5.9
+2015,February,Minnesota,Freeborn County,4.5
+2015,February,Minnesota,Traverse County,6.1
+2015,February,Minnesota,Clay County,4.0
+2015,February,Minnesota,Kandiyohi County,5.2
+2015,February,Minnesota,Washington County,3.7
+2015,February,Minnesota,Redwood County,5.4
+2015,February,Minnesota,Koochiching County,8.6
+2015,February,Minnesota,Rock County,2.8
+2015,February,Minnesota,Pennington County,6.6
+2015,February,Minnesota,Becker County,5.8
+2015,February,Minnesota,Mille Lacs County,7.9
+2015,February,Minnesota,Winona County,3.7
+2015,February,Minnesota,Stevens County,3.8
+2015,February,Minnesota,Renville County,6.2
+2015,February,Minnesota,Nicollet County,3.1
+2015,February,Minnesota,Polk County,5.0
+2015,February,Minnesota,Morrison County,8.0
+2015,February,Minnesota,Wright County,4.8
+2015,February,Minnesota,Ramsey County,3.9
+2015,February,Minnesota,Yellow Medicine County,5.2
+2015,February,Minnesota,Grant County,7.0
+2015,February,Minnesota,Jackson County,4.3
+2015,February,Minnesota,Cass County,9.2
+2015,February,Minnesota,Aitkin County,7.9
+2015,February,Minnesota,Dodge County,5.0
+2015,February,Minnesota,Big Stone County,6.0
+2015,February,Minnesota,Houston County,5.4
+2015,February,Minnesota,Le Sueur County,6.5
+2015,February,Minnesota,Carlton County,5.9
+2015,February,Minnesota,Rice County,4.3
+2015,February,Minnesota,Cook County,6.5
+2015,February,Illinois,Monroe County,4.8
+2015,February,Illinois,Madison County,6.3
+2015,February,Illinois,Bond County,5.9
+2015,February,Illinois,Adams County,5.1
+2015,February,Illinois,Macoupin County,6.9
+2015,February,Illinois,Marion County,7.1
+2015,February,Illinois,Knox County,6.6
+2015,February,Illinois,Williamson County,6.2
+2015,February,Illinois,Gallatin County,6.6
+2015,February,Illinois,Champaign County,5.3
+2015,February,Illinois,Coles County,6.2
+2015,February,Illinois,Hardin County,8.1
+2015,February,Illinois,Pike County,6.0
+2015,February,Illinois,Whiteside County,6.6
+2015,February,Illinois,Saline County,7.1
+2015,February,Illinois,Logan County,6.0
+2015,February,Illinois,De Witt County,6.1
+2015,February,Illinois,Lawrence County,7.3
+2015,February,Illinois,Boone County,7.5
+2015,February,Illinois,Edgar County,6.7
+2015,February,Illinois,Clinton County,5.1
+2015,February,Illinois,Brown County,4.2
+2015,February,Illinois,Clark County,7.0
+2015,February,Illinois,Macon County,7.4
+2015,February,Illinois,Dupage County,5.2
+2015,February,Illinois,Christian County,7.0
+2015,February,Illinois,Ford County,5.9
+2015,February,Illinois,Piatt County,5.3
+2015,February,Illinois,Scott County,7.5
+2015,February,Illinois,White County,5.8
+2015,February,Illinois,Moultrie County,4.5
+2015,February,Illinois,Kane County,6.5
+2015,February,Illinois,Bureau County,7.3
+2015,February,Illinois,Vermilion County,7.4
+2015,February,Illinois,Livingston County,5.8
+2015,February,Illinois,Effingham County,5.5
+2015,February,Illinois,Mason County,7.6
+2015,February,Illinois,Jefferson County,6.8
+2015,February,Illinois,Pope County,6.8
+2015,February,Illinois,Marshall County,7.1
+2015,February,Illinois,Pulaski County,8.9
+2015,February,Illinois,Ogle County,7.1
+2015,February,Illinois,Jasper County,7.1
+2015,February,Illinois,Winnebago County,7.2
+2015,February,Illinois,Stephenson County,7.6
+2015,February,Illinois,Morgan County,5.6
+2015,February,Illinois,Perry County,7.6
+2015,February,Illinois,Wabash County,5.9
+2015,February,Illinois,La Salle County,7.5
+2015,February,Illinois,Lake County,6.2
+2015,February,Illinois,Douglas County,5.2
+2015,February,Illinois,Randolph County,5.9
+2015,February,Illinois,Fayette County,7.5
+2015,February,Illinois,Saint Clair County,6.8
+2015,February,Illinois,Shelby County,6.6
+2015,February,Illinois,Iroquois County,6.6
+2015,February,Illinois,Warren County,5.7
+2015,February,Illinois,Edwards County,6.8
+2015,February,Illinois,Stark County,7.6
+2015,February,Illinois,Lee County,6.1
+2015,February,Illinois,Menard County,5.5
+2015,February,Illinois,Fulton County,8.3
+2015,February,Illinois,McDonough County,6.2
+2015,February,Illinois,Woodford County,5.5
+2015,February,Illinois,McLean County,4.9
+2015,February,Illinois,Franklin County,8.1
+2015,February,Illinois,Mercer County,7.3
+2015,February,Illinois,Johnson County,8.7
+2015,February,Illinois,Clay County,7.5
+2015,February,Illinois,Henry County,6.7
+2015,February,Illinois,Schuyler County,6.8
+2015,February,Illinois,Cumberland County,6.1
+2015,February,Illinois,Washington County,4.3
+2015,February,Illinois,Putnam County,7.4
+2015,February,Illinois,Kendall County,5.9
+2015,February,Illinois,Crawford County,6.8
+2015,February,Illinois,Montgomery County,8.2
+2015,February,Illinois,Alexander County,8.5
+2015,February,Illinois,Wayne County,7.1
+2015,February,Illinois,Calhoun County,8.0
+2015,February,Illinois,Kankakee County,7.4
+2015,February,Illinois,Dekalb County,6.1
+2015,February,Illinois,Tazewell County,6.5
+2015,February,Illinois,Henderson County,6.7
+2015,February,Illinois,Grundy County,8.4
+2015,February,Illinois,Jersey County,6.8
+2015,February,Illinois,Carroll County,6.7
+2015,February,Illinois,Jackson County,5.7
+2015,February,Illinois,McHenry County,6.3
+2015,February,Illinois,Cass County,6.3
+2015,February,Illinois,Greene County,6.7
+2015,February,Illinois,Sangamon County,5.7
+2015,February,Illinois,Hancock County,6.7
+2015,February,Illinois,Union County,8.3
+2015,February,Illinois,Richland County,6.4
+2015,February,Illinois,Peoria County,7.0
+2015,February,Illinois,Massac County,7.6
+2015,February,Illinois,Cook County,6.7
+2015,February,Illinois,Jo Daviess County,6.8
+2015,February,Illinois,Hamilton County,5.8
+2015,February,Illinois,Will County,7.0
+2015,February,Illinois,Rock Island County,6.8
+2015,February,Arkansas,Newton County,6.3
+2015,February,Arkansas,Monroe County,7.6
+2015,February,Arkansas,Polk County,6.7
+2015,February,Arkansas,Calhoun County,6.2
+2015,February,Arkansas,Hot Spring County,5.8
+2015,February,Arkansas,Jefferson County,8.1
+2015,February,Arkansas,Madison County,4.6
+2015,February,Arkansas,Lonoke County,5.1
+2015,February,Arkansas,Jackson County,10.1
+2015,February,Arkansas,Craighead County,5.4
+2015,February,Arkansas,Pulaski County,5.5
+2015,February,Arkansas,Cross County,6.9
+2015,February,Arkansas,Saint Francis County,8.8
+2015,February,Arkansas,Conway County,6.8
+2015,February,Arkansas,Arkansas County,5.2
+2015,February,Arkansas,Lee County,8.7
+2015,February,Arkansas,Stone County,8.2
+2015,February,Arkansas,Lafayette County,8.8
+2015,February,Arkansas,Columbia County,7.1
+2015,February,Arkansas,Saline County,4.9
+2015,February,Arkansas,Fulton County,6.2
+2015,February,Arkansas,Crittenden County,7.7
+2015,February,Arkansas,Hempstead County,6.1
+2015,February,Arkansas,Prairie County,5.4
+2015,February,Arkansas,Lincoln County,7.6
+2015,February,Arkansas,Woodruff County,8.0
+2015,February,Arkansas,Ashley County,9.6
+2015,February,Arkansas,Pike County,7.2
+2015,February,Arkansas,Marion County,6.4
+2015,February,Arkansas,Perry County,7.6
+2015,February,Arkansas,Bradley County,7.3
+2015,February,Arkansas,Franklin County,5.9
+2015,February,Arkansas,Logan County,6.1
+2015,February,Arkansas,Phillips County,9.3
+2015,February,Arkansas,Sharp County,8.9
+2015,February,Arkansas,Chicot County,11.9
+2015,February,Arkansas,Clay County,8.7
+2015,February,Arkansas,Howard County,4.9
+2015,February,Arkansas,Crawford County,6.3
+2015,February,Arkansas,Boone County,6.1
+2015,February,Arkansas,Greene County,6.4
+2015,February,Arkansas,Izard County,7.8
+2015,February,Arkansas,Little River County,6.6
+2015,February,Arkansas,Cleveland County,6.9
+2015,February,Arkansas,Benton County,4.6
+2015,February,Arkansas,Lawrence County,7.6
+2015,February,Arkansas,Montgomery County,8.5
+2015,February,Arkansas,Johnson County,6.7
+2015,February,Arkansas,Washington County,4.2
+2015,February,Arkansas,Clark County,6.2
+2015,February,Arkansas,Sevier County,6.8
+2015,February,Arkansas,Baxter County,6.6
+2015,February,Arkansas,Independence County,7.7
+2015,February,Arkansas,Pope County,5.8
+2015,February,Arkansas,Van Buren County,8.2
+2015,February,Arkansas,Garland County,6.5
+2015,February,Arkansas,Yell County,5.8
+2015,February,Arkansas,Poinsett County,6.9
+2015,February,Arkansas,Randolph County,9.6
+2015,February,Arkansas,Ouachita County,7.8
+2015,February,Arkansas,Carroll County,6.7
+2015,February,Arkansas,Nevada County,5.9
+2015,February,Arkansas,Drew County,8.7
+2015,February,Arkansas,Desha County,9.6
+2015,February,Arkansas,Union County,7.3
+2015,February,Arkansas,White County,7.4
+2015,February,Arkansas,Grant County,5.4
+2015,February,Arkansas,Sebastian County,5.8
+2015,February,Arkansas,Scott County,5.5
+2015,February,Arkansas,Mississippi County,10.2
+2015,February,Arkansas,Dallas County,9.0
+2015,February,Arkansas,Searcy County,8.1
+2015,February,Arkansas,Miller County,5.9
+2015,February,Arkansas,Faulkner County,5.5
+2015,February,Arkansas,Cleburne County,8.3
+2015,February,New Mexico,Torrance County,9.6
+2015,February,New Mexico,Eddy County,4.7
+2015,February,New Mexico,McKinley County,9.8
+2015,February,New Mexico,Santa Fe County,5.7
+2015,February,New Mexico,San Juan County,6.5
+2015,February,New Mexico,San Miguel County,7.8
+2015,February,New Mexico,Bernalillo County,6.0
+2015,February,New Mexico,Curry County,5.0
+2015,February,New Mexico,Roosevelt County,5.2
+2015,February,New Mexico,Debaca County,4.8
+2015,February,New Mexico,Luna County,21.2
+2015,February,New Mexico,Lincoln County,6.5
+2015,February,New Mexico,Catron County,10.4
+2015,February,New Mexico,Hidalgo County,6.7
+2015,February,New Mexico,Sierra County,10.8
+2015,February,New Mexico,Quay County,7.3
+2015,February,New Mexico,Colfax County,6.5
+2015,February,New Mexico,Otero County,6.3
+2015,February,New Mexico,Valencia County,7.7
+2015,February,New Mexico,Socorro County,7.7
+2015,February,New Mexico,Lea County,4.9
+2015,February,New Mexico,Cibola County,8.0
+2015,February,New Mexico,Taos County,9.3
+2015,February,New Mexico,Harding County,8.4
+2015,February,New Mexico,Mora County,11.0
+2015,February,New Mexico,Rio Arriba County,8.5
+2015,February,New Mexico,Dona Ana County,7.7
+2015,February,New Mexico,Union County,5.1
+2015,February,New Mexico,Chaves County,6.1
+2015,February,New Mexico,Los Alamos County,4.2
+2015,February,New Mexico,Grant County,6.9
+2015,February,New Mexico,Sandoval County,6.8
+2015,February,New Mexico,Guadalupe County,8.1
+2015,February,Indiana,Monroe County,5.2
+2015,February,Indiana,Madison County,6.9
+2015,February,Indiana,Vermillion County,8.5
+2015,February,Indiana,Fountain County,6.6
+2015,February,Indiana,Adams County,4.3
+2015,February,Indiana,Marion County,5.8
+2015,February,Indiana,Knox County,5.0
+2015,February,Indiana,Dearborn County,6.1
+2015,February,Indiana,Tipton County,4.9
+2015,February,Indiana,Pike County,5.0
+2015,February,Indiana,Vigo County,7.3
+2015,February,Indiana,Lawrence County,7.9
+2015,February,Indiana,Orange County,7.3
+2015,February,Indiana,Steuben County,4.7
+2015,February,Indiana,Boone County,4.2
+2015,February,Indiana,Benton County,5.3
+2015,February,Indiana,Jennings County,6.7
+2015,February,Indiana,Brown County,6.2
+2015,February,Indiana,Clark County,5.0
+2015,February,Indiana,Gibson County,4.3
+2015,February,Indiana,Spencer County,5.2
+2015,February,Indiana,Hendricks County,4.3
+2015,February,Indiana,Scott County,6.2
+2015,February,Indiana,White County,5.0
+2015,February,Indiana,Grant County,6.0
+2015,February,Indiana,Starke County,7.5
+2015,February,Indiana,Howard County,5.8
+2015,February,Indiana,Rush County,5.3
+2015,February,Indiana,Owen County,7.5
+2015,February,Indiana,Warrick County,4.7
+2015,February,Indiana,Jefferson County,5.6
+2015,February,Indiana,Marshall County,5.0
+2015,February,Indiana,Pulaski County,5.3
+2015,February,Indiana,Saint Joseph County,6.0
+2015,February,Indiana,Jasper County,7.4
+2015,February,Indiana,Switzerland County,5.7
+2015,February,Indiana,Morgan County,5.7
+2015,February,Indiana,Perry County,5.4
+2015,February,Indiana,Wabash County,5.6
+2015,February,Indiana,Vanderburgh County,4.8
+2015,February,Indiana,Elkhart County,4.3
+2015,February,Indiana,Whitley County,4.7
+2015,February,Indiana,Lake County,8.0
+2015,February,Indiana,Noble County,4.8
+2015,February,Indiana,Blackford County,6.8
+2015,February,Indiana,Randolph County,6.2
+2015,February,Indiana,Fayette County,7.2
+2015,February,Indiana,DeKalb County,4.7
+2015,February,Indiana,Parke County,7.2
+2015,February,Indiana,Shelby County,5.4
+2015,February,Indiana,Decatur County,4.8
+2015,February,Indiana,Sullivan County,7.0
+2015,February,Indiana,Warren County,5.7
+2015,February,Indiana,Bartholomew County,4.3
+2015,February,Indiana,Wayne County,5.9
+2015,February,Indiana,Martin County,5.0
+2015,February,Indiana,Huntington County,5.3
+2015,February,Indiana,Fulton County,6.0
+2015,February,Indiana,Dubois County,3.9
+2015,February,Indiana,Delaware County,6.5
+2015,February,Indiana,Franklin County,6.7
+2015,February,Indiana,Allen County,5.4
+2015,February,Indiana,Johnson County,4.7
+2015,February,Indiana,Clay County,6.4
+2015,February,Indiana,Henry County,6.5
+2015,February,Indiana,Crawford County,7.8
+2015,February,Indiana,Washington County,6.1
+2015,February,Indiana,Harrison County,5.4
+2015,February,Indiana,Putnam County,6.1
+2015,February,Indiana,Floyd County,4.8
+2015,February,Indiana,Wells County,4.5
+2015,February,Indiana,Daviess County,4.3
+2015,February,Indiana,Kosciusko County,4.6
+2015,February,Indiana,Montgomery County,4.6
+2015,February,Indiana,Newton County,7.2
+2015,February,Indiana,Tippecanoe County,4.4
+2015,February,Indiana,Miami County,6.3
+2015,February,Indiana,Hancock County,5.0
+2015,February,Indiana,Carroll County,4.9
+2015,February,Indiana,LaGrange County,4.0
+2015,February,Indiana,Jackson County,4.5
+2015,February,Indiana,Posey County,4.4
+2015,February,Indiana,Ohio County,6.5
+2015,February,Indiana,Cass County,5.4
+2015,February,Indiana,Greene County,8.0
+2015,February,Indiana,LaPorte County,7.9
+2015,February,Indiana,Clinton County,4.5
+2015,February,Indiana,Union County,5.1
+2015,February,Indiana,Porter County,6.4
+2015,February,Indiana,Jay County,5.5
+2015,February,Indiana,Hamilton County,3.7
+2015,February,Indiana,Ripley County,6.9
+2015,February,Maryland,Cecil County,6.9
+2015,February,Maryland,Anne Arundel County,4.8
+2015,February,Maryland,Calvert County,4.8
+2015,February,Maryland,Prince George's County,5.6
+2015,February,Maryland,Talbot County,6.2
+2015,February,Maryland,Charles County,5.4
+2015,February,Maryland,Carroll County,4.8
+2015,February,Maryland,Dorchester County,9.0
+2015,February,Maryland,Allegany County,8.2
+2015,February,Maryland,Frederick County,5.0
+2015,February,Maryland,Montgomery County,4.1
+2015,February,Maryland,Saint Marys County,5.2
+2015,February,Maryland,Washington County,6.8
+2015,February,Maryland,Baltimore County,5.9
+2015,February,Maryland,Queen Annes County,5.2
+2015,February,Maryland,Garrett County,8.4
+2015,February,Maryland,Worcester County,15.6
+2015,February,Maryland,Baltimore City,8.3
+2015,February,Maryland,Wicomico County,8.5
+2015,February,Maryland,Howard County,4.0
+2015,February,Maryland,Harford County,5.5
+2015,February,Maryland,Kent County,6.8
+2015,February,Maryland,Caroline County,6.7
+2015,February,Maryland,Somerset County,10.0
+2015,February,Louisiana,Saint Helena Parish,9.9
+2015,February,Louisiana,Saint Landry Parish,8.2
+2015,February,Louisiana,Saint Bernard Parish,7.1
+2015,February,Louisiana,Saint Mary Parish,7.2
+2015,February,Louisiana,Orleans Parish,6.7
+2015,February,Louisiana,Morehouse Parish,12.2
+2015,February,Louisiana,Ouachita Parish,6.9
+2015,February,Louisiana,Red River Parish,7.3
+2015,February,Louisiana,West Baton Rouge Parish,6.0
+2015,February,Louisiana,Vermilion Parish,6.5
+2015,February,Louisiana,Saint Martin Parish,6.3
+2015,February,Louisiana,Grant Parish,7.3
+2015,February,Louisiana,La Salle Parish,6.4
+2015,February,Louisiana,Madison Parish,10.5
+2015,February,Louisiana,Terrebonne Parish,5.4
+2015,February,Louisiana,East Baton Rouge Parish,5.6
+2015,February,Louisiana,Lincoln Parish,7.3
+2015,February,Louisiana,Evangeline Parish,7.4
+2015,February,Louisiana,Lafourche Parish,5.1
+2015,February,Louisiana,Union Parish,7.8
+2015,February,Louisiana,Cameron Parish,4.9
+2015,February,Louisiana,Livingston Parish,5.3
+2015,February,Louisiana,Bossier Parish,5.7
+2015,February,Louisiana,Tensas Parish,10.9
+2015,February,Louisiana,Ascension Parish,5.4
+2015,February,Louisiana,Richland Parish,9.6
+2015,February,Louisiana,Jefferson Davis Parish,6.2
+2015,February,Louisiana,Saint James Parish,8.8
+2015,February,Louisiana,Winn Parish,7.7
+2015,February,Louisiana,East Carroll Parish,16.0
+2015,February,Louisiana,Acadia Parish,6.3
+2015,February,Louisiana,West Carroll Parish,16.1
+2015,February,Louisiana,Bienville Parish,8.7
+2015,February,Louisiana,West Feliciana Parish,5.8
+2015,February,Louisiana,Iberville Parish,7.7
+2015,February,Louisiana,Vernon Parish,8.0
+2015,February,Louisiana,Franklin Parish,9.8
+2015,February,Louisiana,Saint John the Baptist Parish,7.9
+2015,February,Louisiana,East Feliciana Parish,6.6
+2015,February,Louisiana,Beauregard Parish,6.5
+2015,February,Louisiana,Iberia Parish,7.4
+2015,February,Louisiana,Washington Parish,7.8
+2015,February,Louisiana,De Soto Parish,8.3
+2015,February,Louisiana,Jefferson Parish,6.0
+2015,February,Louisiana,Rapides Parish,6.7
+2015,February,Louisiana,Lafayette Parish,5.4
+2015,February,Louisiana,Calcasieu Parish,5.7
+2015,February,Louisiana,Caldwell Parish,8.8
+2015,February,Louisiana,Avoyelles Parish,7.5
+2015,February,Louisiana,Natchitoches Parish,8.0
+2015,February,Louisiana,Sabine Parish,7.2
+2015,February,Louisiana,Pointe Coupee Parish,6.6
+2015,February,Louisiana,Catahoula Parish,9.2
+2015,February,Louisiana,Caddo Parish,7.3
+2015,February,Louisiana,Saint Tammany Parish,5.6
+2015,February,Louisiana,Jackson Parish,6.1
+2015,February,Louisiana,Assumption Parish,8.2
+2015,February,Louisiana,Saint Charles Parish,5.9
+2015,February,Louisiana,Concordia Parish,8.6
+2015,February,Louisiana,Tangipahoa Parish,7.5
+2015,February,Louisiana,Allen Parish,7.4
+2015,February,Louisiana,Plaquemines Parish,5.9
+2015,February,Louisiana,Claiborne Parish,7.9
+2015,February,Louisiana,Webster Parish,9.1
+2015,February,Idaho,Jerome County,4.1
+2015,February,Idaho,Jefferson County,4.2
+2015,February,Idaho,Bonner County,8.0
+2015,February,Idaho,Owyhee County,5.8
+2015,February,Idaho,Minidoka County,4.6
+2015,February,Idaho,Payette County,5.6
+2015,February,Idaho,Caribou County,5.2
+2015,February,Idaho,Adams County,10.8
+2015,February,Idaho,Lemhi County,10.1
+2015,February,Idaho,Blaine County,4.6
+2015,February,Idaho,Valley County,8.0
+2015,February,Idaho,Latah County,4.0
+2015,February,Idaho,Kootenai County,6.2
+2015,February,Idaho,Lewis County,7.4
+2015,February,Idaho,Lincoln County,6.3
+2015,February,Idaho,Shoshone County,9.1
+2015,February,Idaho,Franklin County,4.5
+2015,February,Idaho,Washington County,6.6
+2015,February,Idaho,Cassia County,4.1
+2015,February,Idaho,Ada County,4.0
+2015,February,Idaho,Custer County,10.0
+2015,February,Idaho,Benewah County,8.8
+2015,February,Idaho,Madison County,3.2
+2015,February,Idaho,Power County,6.4
+2015,February,Idaho,Teton County,4.4
+2015,February,Idaho,Clark County,4.4
+2015,February,Idaho,Idaho County,7.7
+2015,February,Idaho,Bear Lake County,5.7
+2015,February,Idaho,Gem County,6.0
+2015,February,Idaho,Twin Falls County,4.3
+2015,February,Idaho,Gooding County,4.5
+2015,February,Idaho,Elmore County,5.5
+2015,February,Idaho,Bingham County,4.9
+2015,February,Idaho,Canyon County,5.6
+2015,February,Idaho,Boise County,8.0
+2015,February,Idaho,Fremont County,4.9
+2015,February,Idaho,Bonneville County,4.1
+2015,February,Idaho,Camas County,4.5
+2015,February,Idaho,Nez Perce County,4.4
+2015,February,Idaho,Oneida County,4.4
+2015,February,Idaho,Butte County,5.6
+2015,February,Idaho,Boundary County,7.8
+2015,February,Idaho,Bannock County,4.7
+2015,February,Idaho,Clearwater County,10.2
+2015,February,Wyoming,Sweetwater County,4.5
+2015,February,Wyoming,Campbell County,3.6
+2015,February,Wyoming,Converse County,3.4
+2015,February,Wyoming,Sublette County,6.0
+2015,February,Wyoming,Weston County,3.7
+2015,February,Wyoming,Big Horn County,4.8
+2015,February,Wyoming,Lincoln County,5.9
+2015,February,Wyoming,Natrona County,4.2
+2015,February,Wyoming,Johnson County,5.9
+2015,February,Wyoming,Platte County,4.3
+2015,February,Wyoming,Hot Springs County,4.4
+2015,February,Wyoming,Albany County,3.3
+2015,February,Wyoming,Sheridan County,4.9
+2015,February,Wyoming,Carbon County,4.4
+2015,February,Wyoming,Laramie County,4.3
+2015,February,Wyoming,Goshen County,3.2
+2015,February,Wyoming,Niobrara County,3.1
+2015,February,Wyoming,Crook County,4.2
+2015,February,Wyoming,Fremont County,5.8
+2015,February,Wyoming,Teton County,3.7
+2015,February,Wyoming,Washakie County,4.8
+2015,February,Wyoming,Uinta County,4.8
+2015,February,Wyoming,Park County,5.0
+2015,February,Tennessee,Cocke County,9.9
+2015,February,Tennessee,Monroe County,6.8
+2015,February,Tennessee,Overton County,7.9
+2015,February,Tennessee,Madison County,6.3
+2015,February,Tennessee,Marion County,7.0
+2015,February,Tennessee,Giles County,5.4
+2015,February,Tennessee,Knox County,4.9
+2015,February,Tennessee,Stewart County,8.8
+2015,February,Tennessee,Williamson County,4.1
+2015,February,Tennessee,Dickson County,5.8
+2015,February,Tennessee,Lincoln County,5.5
+2015,February,Tennessee,Tipton County,7.7
+2015,February,Tennessee,Lawrence County,7.4
+2015,February,Tennessee,Benton County,8.2
+2015,February,Tennessee,Haywood County,9.0
+2015,February,Tennessee,Smith County,6.0
+2015,February,Tennessee,Macon County,5.7
+2015,February,Tennessee,Gibson County,8.1
+2015,February,Tennessee,Scott County,10.1
+2015,February,Tennessee,Hawkins County,6.9
+2015,February,Tennessee,Robertson County,5.1
+2015,February,Tennessee,Grainger County,7.5
+2015,February,Tennessee,Davidson County,4.6
+2015,February,Tennessee,McNairy County,9.4
+2015,February,Tennessee,Jefferson County,7.4
+2015,February,Tennessee,Campbell County,8.3
+2015,February,Tennessee,Marshall County,5.6
+2015,February,Tennessee,Rhea County,7.6
+2015,February,Tennessee,Anderson County,6.3
+2015,February,Tennessee,Morgan County,8.0
+2015,February,Tennessee,Perry County,6.8
+2015,February,Tennessee,Chester County,6.2
+2015,February,Tennessee,Lake County,9.2
+2015,February,Tennessee,White County,6.7
+2015,February,Tennessee,Meigs County,8.4
+2015,February,Tennessee,Fayette County,6.7
+2015,February,Tennessee,Claiborne County,7.6
+2015,February,Tennessee,Bedford County,6.7
+2015,February,Tennessee,Shelby County,6.8
+2015,February,Tennessee,Sequatchie County,6.7
+2015,February,Tennessee,Decatur County,9.0
+2015,February,Tennessee,Sullivan County,6.1
+2015,February,Tennessee,Moore County,5.0
+2015,February,Tennessee,Warren County,5.9
+2015,February,Tennessee,Unicoi County,8.9
+2015,February,Tennessee,Hardin County,7.9
+2015,February,Tennessee,Maury County,5.3
+2015,February,Tennessee,Rutherford County,4.6
+2015,February,Tennessee,Cheatham County,5.1
+2015,February,Tennessee,Franklin County,5.5
+2015,February,Tennessee,Hamblen County,6.8
+2015,February,Tennessee,Johnson County,7.0
+2015,February,Tennessee,Clay County,10.7
+2015,February,Tennessee,Roane County,7.0
+2015,February,Tennessee,Henry County,7.5
+2015,February,Tennessee,Cumberland County,8.4
+2015,February,Tennessee,Crockett County,7.2
+2015,February,Tennessee,Bledsoe County,8.6
+2015,February,Tennessee,Washington County,5.8
+2015,February,Tennessee,Carter County,7.1
+2015,February,Tennessee,Loudon County,6.0
+2015,February,Tennessee,Blount County,5.7
+2015,February,Tennessee,Putnam County,6.2
+2015,February,Tennessee,Hardeman County,8.3
+2015,February,Tennessee,Weakley County,7.1
+2015,February,Tennessee,Sevier County,9.5
+2015,February,Tennessee,Montgomery County,5.9
+2015,February,Tennessee,Humphreys County,7.4
+2015,February,Tennessee,Wayne County,8.4
+2015,February,Tennessee,Obion County,9.0
+2015,February,Tennessee,Polk County,7.4
+2015,February,Tennessee,Dekalb County,7.4
+2015,February,Tennessee,Henderson County,8.3
+2015,February,Tennessee,Grundy County,8.5
+2015,February,Tennessee,Hancock County,8.7
+2015,February,Tennessee,Carroll County,9.3
+2015,February,Tennessee,Lewis County,8.0
+2015,February,Tennessee,Jackson County,8.8
+2015,February,Tennessee,Bradley County,5.6
+2015,February,Tennessee,Cannon County,5.8
+2015,February,Tennessee,Greene County,7.2
+2015,February,Tennessee,Coffee County,5.8
+2015,February,Tennessee,Dyer County,7.3
+2015,February,Tennessee,Houston County,9.7
+2015,February,Tennessee,Lauderdale County,9.1
+2015,February,Tennessee,Sumner County,4.9
+2015,February,Tennessee,McMinn County,6.8
+2015,February,Tennessee,Fentress County,7.9
+2015,February,Tennessee,Union County,7.6
+2015,February,Tennessee,Hickman County,6.0
+2015,February,Tennessee,Wilson County,4.8
+2015,February,Tennessee,Trousdale County,6.6
+2015,February,Tennessee,Hamilton County,5.6
+2015,February,Tennessee,Pickett County,9.1
+2015,February,Tennessee,Van Buren County,9.5
+2015,February,Arizona,Pinal County,6.5
+2015,February,Arizona,Greenlee County,7.9
+2015,February,Arizona,La Paz County,8.4
+2015,February,Arizona,Mohave County,8.7
+2015,February,Arizona,Yuma County,19.0
+2015,February,Arizona,Gila County,8.3
+2015,February,Arizona,Maricopa County,5.3
+2015,February,Arizona,Navajo County,10.7
+2015,February,Arizona,Graham County,7.7
+2015,February,Arizona,Pima County,5.5
+2015,February,Arizona,Apache County,14.4
+2015,February,Arizona,Coconino County,6.9
+2015,February,Arizona,Cochise County,7.8
+2015,February,Arizona,Santa Cruz County,10.6
+2015,February,Arizona,Yavapai County,5.9
+2015,February,Iowa,Monroe County,5.3
+2015,February,Iowa,Taylor County,3.4
+2015,February,Iowa,Madison County,5.4
+2015,February,Iowa,Bremer County,4.2
+2015,February,Iowa,Adams County,3.4
+2015,February,Iowa,Marion County,4.1
+2015,February,Iowa,Linn County,4.4
+2015,February,Iowa,Poweshiek County,4.6
+2015,February,Iowa,Hardin County,5.3
+2015,February,Iowa,Allamakee County,6.8
+2015,February,Iowa,Lyon County,2.4
+2015,February,Iowa,Butler County,5.5
+2015,February,Iowa,Boone County,3.6
+2015,February,Iowa,Cerro Gordo County,4.7
+2015,February,Iowa,Benton County,4.8
+2015,February,Iowa,Clinton County,5.6
+2015,February,Iowa,Black Hawk County,5.1
+2015,February,Iowa,Van Buren County,4.6
+2015,February,Iowa,Cherokee County,6.9
+2015,February,Iowa,Scott County,5.3
+2015,February,Iowa,Buena Vista County,3.7
+2015,February,Iowa,Howard County,4.8
+2015,February,Iowa,Jefferson County,4.3
+2015,February,Iowa,Des Moines County,5.0
+2015,February,Iowa,Marshall County,6.6
+2015,February,Iowa,Wapello County,5.3
+2015,February,Iowa,Sioux County,3.4
+2015,February,Iowa,Page County,4.4
+2015,February,Iowa,Jasper County,4.7
+2015,February,Iowa,Sac County,4.2
+2015,February,Iowa,Winnebago County,4.3
+2015,February,Iowa,Appanoose County,5.4
+2015,February,Iowa,Mahaska County,4.7
+2015,February,Iowa,Pottawattamie County,4.2
+2015,February,Iowa,Emmet County,3.9
+2015,February,Iowa,Keokuk County,5.2
+2015,February,Iowa,Clayton County,6.1
+2015,February,Iowa,Fremont County,3.8
+2015,February,Iowa,Fayette County,5.9
+2015,February,Iowa,Shelby County,3.2
+2015,February,Iowa,Decatur County,3.8
+2015,February,Iowa,Warren County,4.3
+2015,February,Iowa,Lee County,5.6
+2015,February,Iowa,Winneshiek County,5.3
+2015,February,Iowa,O'Brien County,3.6
+2015,February,Iowa,Cedar County,4.3
+2015,February,Iowa,Ringgold County,4.1
+2015,February,Iowa,Delaware County,4.6
+2015,February,Iowa,Muscatine County,4.5
+2015,February,Iowa,Franklin County,4.4
+2015,February,Iowa,Monona County,6.0
+2015,February,Iowa,Johnson County,2.8
+2015,February,Iowa,Clay County,4.5
+2015,February,Iowa,Henry County,4.5
+2015,February,Iowa,Crawford County,4.8
+2015,February,Iowa,Union County,5.1
+2015,February,Iowa,Washington County,4.1
+2015,February,Iowa,Ida County,3.9
+2015,February,Iowa,Plymouth County,3.4
+2015,February,Iowa,Harrison County,4.2
+2015,February,Iowa,Tama County,6.1
+2015,February,Iowa,Floyd County,4.8
+2015,February,Iowa,Guthrie County,5.1
+2015,February,Iowa,Montgomery County,3.9
+2015,February,Iowa,Kossuth County,3.6
+2015,February,Iowa,Webster County,4.9
+2015,February,Iowa,Wayne County,4.8
+2015,February,Iowa,Humboldt County,4.3
+2015,February,Iowa,Polk County,4.3
+2015,February,Iowa,Calhoun County,5.1
+2015,February,Iowa,Clarke County,5.1
+2015,February,Iowa,Buchanan County,5.5
+2015,February,Iowa,Wright County,4.5
+2015,February,Iowa,Lucas County,4.2
+2015,February,Iowa,Grundy County,4.8
+2015,February,Iowa,Adair County,4.6
+2015,February,Iowa,Hancock County,3.2
+2015,February,Iowa,Dickinson County,5.8
+2015,February,Iowa,Carroll County,3.2
+2015,February,Iowa,Jones County,6.0
+2015,February,Iowa,Jackson County,5.7
+2015,February,Iowa,Dubuque County,4.7
+2015,February,Iowa,Davis County,5.0
+2015,February,Iowa,Woodbury County,4.3
+2015,February,Iowa,Cass County,5.2
+2015,February,Iowa,Iowa County,4.8
+2015,February,Iowa,Chickasaw County,5.7
+2015,February,Iowa,Greene County,3.9
+2015,February,Iowa,Story County,2.6
+2015,February,Iowa,Mills County,4.3
+2015,February,Iowa,Osceola County,3.6
+2015,February,Iowa,Worth County,4.8
+2015,February,Iowa,Palo Alto County,3.5
+2015,February,Iowa,Louisa County,4.5
+2015,February,Iowa,Mitchell County,3.7
+2015,February,Iowa,Audubon County,5.3
+2015,February,Iowa,Dallas County,3.3
+2015,February,Iowa,Hamilton County,4.9
+2015,February,Iowa,Pocahontas County,3.6
+2015,February,Kansas,Wabaunsee County,4.5
+2015,February,Kansas,Stanton County,3.0
+2015,February,Kansas,Doniphan County,5.0
+2015,February,Kansas,Gray County,2.5
+2015,February,Kansas,Marion County,3.7
+2015,February,Kansas,Linn County,7.5
+2015,February,Kansas,Reno County,4.7
+2015,February,Kansas,Lincoln County,3.5
+2015,February,Kansas,Shawnee County,4.9
+2015,February,Kansas,Cowley County,4.5
+2015,February,Kansas,Saline County,4.2
+2015,February,Kansas,Logan County,2.3
+2015,February,Kansas,Chase County,4.3
+2015,February,Kansas,Lyon County,4.9
+2015,February,Kansas,Butler County,4.7
+2015,February,Kansas,Wyandotte County,7.3
+2015,February,Kansas,Sheridan County,2.3
+2015,February,Kansas,Smith County,3.4
+2015,February,Kansas,Brown County,4.5
+2015,February,Kansas,Clark County,2.4
+2015,February,Kansas,Rooks County,4.9
+2015,February,Kansas,Cherokee County,4.7
+2015,February,Kansas,Nemaha County,2.7
+2015,February,Kansas,Ford County,3.7
+2015,February,Kansas,Scott County,2.6
+2015,February,Kansas,Harper County,4.1
+2015,February,Kansas,Grant County,3.7
+2015,February,Kansas,Stafford County,4.3
+2015,February,Kansas,Pratt County,3.9
+2015,February,Kansas,Kingman County,4.3
+2015,February,Kansas,Rush County,3.6
+2015,February,Kansas,Greenwood County,4.9
+2015,February,Kansas,Greeley County,2.5
+2015,February,Kansas,Sedgwick County,5.2
+2015,February,Kansas,Jefferson County,5.2
+2015,February,Kansas,Marshall County,3.4
+2015,February,Kansas,Morton County,4.1
+2015,February,Kansas,Norton County,2.6
+2015,February,Kansas,Rawlins County,2.5
+2015,February,Kansas,Bourbon County,5.4
+2015,February,Kansas,Meade County,3.1
+2015,February,Kansas,Ellsworth County,3.6
+2015,February,Kansas,Wichita County,3.5
+2015,February,Kansas,Douglas County,3.9
+2015,February,Kansas,Kiowa County,3.2
+2015,February,Kansas,Seward County,4.2
+2015,February,Kansas,Haskell County,2.7
+2015,February,Kansas,Hodgeman County,3.4
+2015,February,Kansas,Osage County,5.9
+2015,February,Kansas,Russell County,3.8
+2015,February,Kansas,Decatur County,3.8
+2015,February,Kansas,Pottawatomie County,4.0
+2015,February,Kansas,Edwards County,3.5
+2015,February,Kansas,Sumner County,4.7
+2015,February,Kansas,Labette County,6.0
+2015,February,Kansas,Thomas County,2.8
+2015,February,Kansas,Republic County,3.1
+2015,February,Kansas,Osborne County,3.5
+2015,February,Kansas,Leavenworth County,5.3
+2015,February,Kansas,Ness County,3.7
+2015,February,Kansas,Jewell County,5.0
+2015,February,Kansas,Franklin County,5.3
+2015,February,Kansas,Allen County,5.0
+2015,February,Kansas,Johnson County,3.8
+2015,February,Kansas,Clay County,4.8
+2015,February,Kansas,Crawford County,5.5
+2015,February,Kansas,Coffey County,4.8
+2015,February,Kansas,Neosho County,7.0
+2015,February,Kansas,Gove County,2.6
+2015,February,Kansas,Washington County,3.9
+2015,February,Kansas,Woodson County,5.0
+2015,February,Kansas,Ottawa County,4.1
+2015,February,Kansas,Barber County,3.6
+2015,February,Kansas,McPherson County,3.0
+2015,February,Kansas,Montgomery County,6.2
+2015,February,Kansas,Ellis County,3.3
+2015,February,Kansas,Cloud County,4.1
+2015,February,Kansas,Stevens County,3.8
+2015,February,Kansas,Anderson County,4.9
+2015,February,Kansas,Barton County,4.5
+2015,February,Kansas,Miami County,5.1
+2015,February,Kansas,Dickinson County,6.0
+2015,February,Kansas,Trego County,4.7
+2015,February,Kansas,Pawnee County,4.2
